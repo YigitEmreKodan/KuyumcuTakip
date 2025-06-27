@@ -1,0 +1,58 @@
+@{
+    ViewData["Title"] = "Rapor";
+}
+
+<h1>Satış / Alış Raporu</h1>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+    <div class="col-md-6">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Toplam Satış
+                <span class="badge bg-success">@ViewBag.SatisToplam ₺</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Toplam Alış
+                <span class="badge bg-primary">@ViewBag.AlisToplam ₺</span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Satış', 'Alış'],
+            datasets: [{
+                data: [@ViewBag.SatisToplam, @ViewBag.AlisToplam],
+                backgroundColor: [
+                    'rgba(40, 167, 69, 0.7)', // Satış - yeşil
+                    'rgba(0, 123, 255, 0.7)'  // Alış - mavi
+                ],
+                borderColor: [
+                    'rgba(40, 167, 69, 1)',
+                    'rgba(0, 123, 255, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                },
+                title: {
+                    display: true,
+                    text: 'Satış ve Alış Dağılımı'
+                }
+            }
+        }
+    });
+</script> 

@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Yönetim Paneli";
+    var users = ViewBag.Users as List<Microsoft.AspNetCore.Identity.IdentityUser>;
+    var roles = ViewBag.Roles as List<Microsoft.AspNetCore.Identity.IdentityRole>;
+}
+
+<h1>Yönetim Paneli</h1>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <h4>Kullanıcılar</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Kullanıcı Adı</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in users)
+                {
+                    <tr>
+                        <td>@user.Email</td>
+                        <td>@user.UserName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <h4>Roller</h4>
+        <ul class="list-group">
+            @foreach (var role in roles)
+            {
+                <li class="list-group-item">@role.Name</li>
+            }
+        </ul>
+    </div>
+</div> 
